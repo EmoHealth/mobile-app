@@ -95,14 +95,21 @@ public class PostActivity extends AppCompatActivity implements Serializable{
             @Override
             public void onClick(View v){
                 selectMoodSad();
+                v.setSelected(true);
+                findViewById(R.id.neutral_button).setSelected(false);
+                findViewById(R.id.happy_button).setSelected(false);
             }
         });
 
-        ImageButton neutralButton = (ImageButton) findViewById(R.id.neutral_button);
+        final ImageButton neutralButton = (ImageButton) findViewById(R.id.neutral_button);
         neutralButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 selectMoodNeutral();
+                v.setSelected(true);
+                findViewById(R.id.sad_button).setSelected(false);
+                findViewById(R.id.happy_button).setSelected(false);
+
             }
         });
 
@@ -111,6 +118,9 @@ public class PostActivity extends AppCompatActivity implements Serializable{
             @Override
             public void onClick(View v){
                 selectMoodHappy();
+                v.setSelected(true);
+                findViewById(R.id.sad_button).setSelected(false);
+                findViewById(R.id.neutral_button).setSelected(false);
             }
         });
     }
