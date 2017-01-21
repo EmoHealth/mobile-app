@@ -18,7 +18,7 @@ import lecho.lib.hellocharts.model.Column;
  * Created by Marx on 1/21/2017.
  */
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter{
+public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String, ColumnChartFrag> listHashMap;
@@ -92,4 +92,5 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
 }
