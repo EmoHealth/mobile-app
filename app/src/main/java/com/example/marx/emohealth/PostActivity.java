@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.marx.emohealth.post.Post;
@@ -18,9 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PostActivity extends AppCompatActivity implements Serializable{
 
@@ -28,11 +24,7 @@ public class PostActivity extends AppCompatActivity implements Serializable{
     final String MOOD_NEUTRAL = "mood-neutral";
     final String MOOD_HAPPY = "mood-happy";
 
-    private Integer images[] = {R.drawable.sad, R.drawable.neutral, R.drawable.happy};
-    private Integer currImage = 0;
-
     private String currentMood;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
