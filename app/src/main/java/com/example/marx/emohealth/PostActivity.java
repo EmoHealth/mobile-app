@@ -1,6 +1,7 @@
 package com.example.marx.emohealth;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,9 +62,13 @@ public class PostActivity extends AppCompatActivity implements Serializable{
             toast.show();
         }
 
+        // Saves the post into the file and calls the overview activity
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
             DataStorage.saveData(getApplicationContext(), postToSave);
+
+            Intent intent = new Intent(this, OverviewActivity.class);
+            startActivity(intent);
         }
     }
 
