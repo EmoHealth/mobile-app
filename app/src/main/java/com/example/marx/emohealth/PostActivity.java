@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.marx.emohealth.post.Post;
 
@@ -16,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -75,8 +77,13 @@ public class PostActivity extends AppCompatActivity implements Serializable{
 
         // The user has yet to select a mood. Prompt error pop up
         if (currentMood == null){
-
+            Context context = getApplicationContext();
+            CharSequence text = "You need to set a mood.";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
+
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
             saveData(postToSave);
