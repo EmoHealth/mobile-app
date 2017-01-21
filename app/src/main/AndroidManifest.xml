@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:exported="true"
             android:name=".stats"
             android:label="@string/title_activity_stats"
             android:theme="@style/AppTheme.NoActionBar"></activity>
