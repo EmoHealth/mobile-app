@@ -34,14 +34,15 @@ public class PostAdapter extends ArrayAdapter<Post> {
         TextView postComment = (TextView) convertView.findViewById(R.id.item);
         // Populate the data into the template view using the data object
         postComment.setText(post.getComments());
+
         if (post.getMood() == 0) {
-            emotionIcon.setImageResource(R.drawable.sad);
+            emotionIcon.setImageResource(R.drawable.sad_default);
         }
         else if (post.getMood() == 1) {
-            emotionIcon.setImageResource(R.drawable.neutral);
+            emotionIcon.setImageResource(R.drawable.neutral_default);
         }
         else {
-            emotionIcon.setImageResource(R.drawable.sad);
+            emotionIcon.setImageResource(R.drawable.happy_default);
         }
 
         // Return the completed view to render on screen
