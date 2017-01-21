@@ -1,16 +1,25 @@
 package com.example.marx.emohealth;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.marx.emohealth.post.Post;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity implements Serializable{
 
     final String MOOD_SAD = "mood-sad";
     final String MOOD_NEUTRAL = "mood-neutral";
@@ -20,6 +29,7 @@ public class PostActivity extends AppCompatActivity {
     private Integer currImage = 0;
 
     private String currentMood;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +77,24 @@ public class PostActivity extends AppCompatActivity {
         if (currentMood == null){
 
         }
-
+        Post postToSave = new Post(currentMood, comment, currentTime);
+        saveData(postToSave);
     }
 
-    protected void saveData(){
+    protected void saveData(Post postToSave){
 
+        try {
+            FileOutputStream fos = openFileOutput(MainActivity.userFileToSave, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(postToSave);
+            oos.close();
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private void selectMoodSad(){
