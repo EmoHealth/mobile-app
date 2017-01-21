@@ -2,6 +2,7 @@ package com.example.marx.emohealth.post;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Post implements Serializable{
 
@@ -33,6 +34,11 @@ public class Post implements Serializable{
 
     public Calendar getTimeOfPost(){
         return this.timeOfPost;
+    }
+
+    @Override
+    public String toString() {
+        return this.comments;
     }
 
 }
