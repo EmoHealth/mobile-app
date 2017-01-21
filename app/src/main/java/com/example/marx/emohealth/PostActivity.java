@@ -94,14 +94,17 @@ public class PostActivity extends AppCompatActivity implements Serializable{
 
     private void selectMoodSad(){
         currentMood = MOOD_SAD;
+        Log.i("Info", "The current mood is " + currentMood);
     }
 
     private void selectMoodHappy(){
         currentMood = MOOD_HAPPY;
+        Log.i("Info", "The current mood is " + currentMood);
     }
 
     private void selectMoodNeutral(){
         currentMood = MOOD_NEUTRAL;
+        Log.i("Info", "The current mood is " + currentMood);
     }
 
     private void setMoodListeners(){
