@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
+import lecho.lib.hellocharts.model.Column;
+
 /**
  * Created by Marx on 1/21/2017.
  */
@@ -19,9 +21,9 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter{
     private Context context;
     private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
+    private HashMap<String, ColumnChartFrag> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, ColumnChartFrag> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -34,7 +36,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return listHashMap.get(listDataHeader.get(groupPosition)).size();
+        return 1;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return listHashMap.get(listDataHeader.get(groupPosition)).get(childPosition);
+        return listHashMap.get(listDataHeader.get(groupPosition));
     }
 
     @Override
@@ -77,16 +79,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        String childTitle = (String) getChild(groupPosition, childPosition);
+
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item, null);
         }
 
-        TextView listChild = (TextView) convertView.findViewById(R.id.list_item);
-        listChild.setText(childTitle);
         return convertView;
-
     }
 
     @Override

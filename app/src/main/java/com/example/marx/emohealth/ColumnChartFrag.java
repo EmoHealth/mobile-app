@@ -24,6 +24,8 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.ColumnChartView;
 
+import static com.example.marx.emohealth.R.id.container;
+
 /**
  * A fragment containing a column chart.
  */
@@ -42,7 +44,6 @@ public class ColumnChartFrag extends Fragment {
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
     private int dataType = DEFAULT_DATA;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
