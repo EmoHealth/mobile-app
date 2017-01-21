@@ -1,5 +1,6 @@
 package com.example.marx.emohealth;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +67,9 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
             DataStorage.saveData(getApplicationContext(), postToSave);
-            
+
+            Intent intent = new Intent(this, OverviewActivity.class);
+            startActivity(intent);
         }
     }
 
