@@ -9,6 +9,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         Intent intent = new Intent(this, PostActivity.class);
         startActivity(intent);
     }

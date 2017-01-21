@@ -25,13 +25,16 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/comment_line"
                 android:layout_weight="6"/>
-            <Button
 
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/post_it"
-                android:layout_weight="1"/>
+                android:id="@+id/post_button"
+                android:layout_weight="1"
+                android:onClick="postMood"/>
 
 
         </LinearLayout>
