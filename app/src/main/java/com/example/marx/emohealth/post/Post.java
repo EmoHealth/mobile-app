@@ -1,8 +1,9 @@
 package com.example.marx.emohealth.post;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Post {
+public class Post implements Serializable{
 
     private String mood;
     private String comments;

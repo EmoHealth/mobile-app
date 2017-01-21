@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
 import com.example.marx.emohealth.post.Post;
 
 import java.io.FileNotFoundException;
@@ -46,8 +47,6 @@ public class PostActivity extends AppCompatActivity implements Serializable{
      */
     public void postMood(View view){
 
-        Log.i("Info", "I got here");
-
         Calendar currentTime = Calendar.getInstance();
 
         EditText commentMessage = (EditText) findViewById(R.id.comment_line);
@@ -64,25 +63,10 @@ public class PostActivity extends AppCompatActivity implements Serializable{
 
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
-            saveData(postToSave);
+            DataStorage.saveData(getApplicationContext(), postToSave);
         }
     }
 
-    protected void saveData(Post postToSave){
-
-        try {
-            FileOutputStream fos = openFileOutput(MainActivity.userFileToSave, Context.MODE_PRIVATE);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(postToSave);
-            oos.close();
-        }
-        catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 
     private void selectMoodSad(){
         currentMood = MOOD_SAD;
