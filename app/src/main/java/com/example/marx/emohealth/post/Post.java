@@ -5,17 +5,17 @@ import java.util.Calendar;
 
 public class Post implements Serializable{
 
-    private String mood;
+    private Integer mood;
     private String comments;
     private Calendar timeOfPost;
 
-    public Post(String mood, String comments, Calendar timeOfPost){
+    public Post(Integer mood, String comments, Calendar timeOfPost){
         this.mood = mood;
         this.comments = comments;
         this.timeOfPost = timeOfPost;
     }
 
-    public void setMood(String mood) {
+    public void setMood(Integer mood) {
         this.mood = mood;
     }
 
@@ -23,7 +23,7 @@ public class Post implements Serializable{
         this.comments = comments;
     }
 
-    public String getMood(){
+    public Integer getMood(){
         return this.mood;
     }
 

@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.example.marx.emohealth.post.Post;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -38,11 +40,13 @@ public class DataStorage {
         ArrayList<Post> listToSave = readData(c);
         listToSave.add(postToAdd);
 
-        try{
+        try {
             FileOutputStream fos = c.openFileOutput(userFileToSave, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(listToSave);
             oos.close();
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
         }

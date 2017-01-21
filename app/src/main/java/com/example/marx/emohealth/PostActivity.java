@@ -22,11 +22,11 @@ import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements Serializable{
 
-    final String MOOD_SAD = "mood-sad";
-    final String MOOD_NEUTRAL = "mood-neutral";
-    final String MOOD_HAPPY = "mood-happy";
+    final Integer MOOD_SAD = 0;
+    final Integer MOOD_NEUTRAL = 1;
+    final Integer MOOD_HAPPY = 2;
 
-    private String currentMood;
+    private Integer currentMood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +66,7 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
             DataStorage.saveData(getApplicationContext(), postToSave);
-
-            Intent intent = new Intent(this, OverviewActivity.class);
-            startActivity(intent);
+            
         }
     }
 
