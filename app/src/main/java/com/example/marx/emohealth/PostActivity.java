@@ -77,8 +77,10 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         if (currentMood == null){
 
         }
-        Post postToSave = new Post(currentMood, comment, currentTime);
-        saveData(postToSave);
+        else {
+            Post postToSave = new Post(currentMood, comment, currentTime);
+            saveData(postToSave);
+        }
     }
 
     protected void saveData(Post postToSave){
