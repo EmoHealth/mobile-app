@@ -13,6 +13,7 @@ public class PostActivity extends AppCompatActivity {
     final String MOOD_NEUTRAL = "mood-neutral";
     final String MOOD_HAPPY = "mood-happy";
 
+
     private String currentMood;
 
     @Override
@@ -44,7 +45,7 @@ public class PostActivity extends AppCompatActivity {
 
         }
 
-        
+
 
     }
 
