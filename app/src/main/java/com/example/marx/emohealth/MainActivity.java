@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        Intent intent = new Intent(this, PostActivity.class);
+        Intent intent = new Intent(this, OverviewActivity.class);
         startActivity(intent);
     }
 }

@@ -17,6 +17,8 @@
         </activity>
 
         <activity android:name=".PostActivity"></activity>
+
+        <activity android:name=".OverviewActivity"></activity>
     </application>
 
 </manifest>

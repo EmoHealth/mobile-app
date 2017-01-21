@@ -5,8 +5,10 @@ import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -15,6 +17,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class OverviewActivity extends AppCompatActivity {
+
+    String[] itemArray = {"Android","IPhone","WindowsMobile","Blackberry",
+            "WebOS","Ubuntu","Windows7","Max OS X"};
 
     private TextView overviewDisplayDate;
     private Button btnChangeDate;
@@ -30,6 +35,7 @@ public class OverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.overview);
         setCurrentDateOnView();
+        setListView();
         addListenerOnButton();
     }
 
@@ -112,4 +118,12 @@ public class OverviewActivity extends AppCompatActivity {
             overviewDisplayDate.setText(displayDate);
         }
     };
+
+    public void setListView() {
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                R.layout.activity_overview_listview, itemArray);
+
+        ListView listView = (ListView) findViewById(R.id.overview_item_list);
+        listView.setAdapter(adapter);
+    }
 }
