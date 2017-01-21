@@ -12,20 +12,27 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        
-            <LinearLayout
+            
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/imageGallery">
-                </LinearLayout>
+                android:id="@+id/sad_button"
+                android:src="@drawable/sad"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/neutral_button"
+                android:src="@drawable/neutral"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/happy_button"
+                android:src="@drawable/happy"/>
 
-
-
-        </HorizontalScrollView>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

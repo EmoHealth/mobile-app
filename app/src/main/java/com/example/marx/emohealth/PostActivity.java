@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -37,29 +38,12 @@ public class PostActivity extends AppCompatActivity implements Serializable{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        addImagesToGallery();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-    }
-
-    protected void addImagesToGallery(){
-        LinearLayout imageGallery = (LinearLayout) findViewById(R.id.imageGallery);
-        for (Integer image : images){
-            imageGallery.addView(getImageView(image));
-        }
-    }
-
-    protected View getImageView(Integer image){
-        ImageView imageView = new ImageView(getApplicationContext());
-        LinearLayout.LayoutParams lp =
-                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.setMargins(0, 0, 10, 0);
-        imageView.setLayoutParams(lp);
-        imageView.setImageResource(image);
-        return imageView;
+        setMoodListeners();
     }
 
 
@@ -68,7 +52,9 @@ public class PostActivity extends AppCompatActivity implements Serializable{
      * The method will first save all the details of his current mood into the Internal Storage.
      * Then it will call the intent into the overview activity.
      */
-    protected void postMood(){
+    public void postMood(View view){
+
+        Log.i("Info", "I got here");
 
         Calendar currentTime = Calendar.getInstance();
 
@@ -118,4 +104,29 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         currentMood = MOOD_NEUTRAL;
     }
 
+    private void setMoodListeners(){
+        ImageButton sadButton = (ImageButton) findViewById(R.id.sad_button);
+        sadButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                selectMoodSad();
+            }
+        });
+
+        ImageButton neutralButton = (ImageButton) findViewById(R.id.neutral_button);
+        neutralButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                selectMoodNeutral();
+            }
+        });
+
+        ImageButton happyButton = (ImageButton) findViewById(R.id.happy_button);
+        happyButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                selectMoodHappy();
+            }
+        });
+    }
 }
