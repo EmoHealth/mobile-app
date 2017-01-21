@@ -26,6 +26,8 @@ public class OverviewActivity extends AppCompatActivity {
             "WebOS","Ubuntu","Windows7","Max OS X"};
 
     ArrayList<Post> overviewItems = new ArrayList<Post>();
+    ArrayList<Post> displayedList = new ArrayList<>();
+    ArrayAdapter adapter;
 
     private TextView overviewDisplayDate;
     private Button btnChangeDate;
@@ -124,25 +126,34 @@ public class OverviewActivity extends AppCompatActivity {
             String displayDate = newDateFormat.format(finalDate);
             // set selected date into textview
             overviewDisplayDate.setText(displayDate);
-            listView.deferNotifyDataSetChanged();
+
+            adapter.clear();
+            Calendar c = Calendar.getInstance();
+            c.setTime(new Date(year, month, day));
+
+            for (int i=0; i < overviewItems.size(); i++) {
+                if (dateCompare(overviewItems.get(i).getTimeOfPost().getTime(), c.getTime())) {
+                    adapter.add(overviewItems.get(i));
+                }
+            }
+            adapter.notifyDataSetChanged();
 
         }
     };
 
     public void setListView() {
 
-        ArrayList<Post> displayedList = new ArrayList<>();
         Calendar c = Calendar.getInstance();
         c.setTime(new Date(year, month, day));
 
         for (int i=0; i < overviewItems.size(); i++) {
-            if (overviewItems.get(i).getTimeOfPost().equals(c)) {
+            if (dateCompare(overviewItems.get(i).getTimeOfPost().getTime(), c.getTime())) {
                 displayedList.add(overviewItems.get(i));
             }
         }
 
-        ArrayAdapter adapter = new ArrayAdapter<Post>(this,
-                R.layout.activity_overview_listview, displayedList);
+        adapter = new ArrayAdapter<Post>(this,
+                R.layout.activity_overview_listview, overviewItems);
 
         listView = (ListView) findViewById(R.id.overview_item_list);
         listView.setAdapter(adapter);
@@ -150,13 +161,29 @@ public class OverviewActivity extends AppCompatActivity {
 
     public void populateArray() {
         Calendar c = Calendar.getInstance();
-        c.setTime(new Date(2017, 01, 01));
+        c.setTime(new Date(2017, 1, 21));
         overviewItems.add(new Post("happy", "i am the best", c));
-        c.setTime(new Date(2017, 01, 01));
+        c.setTime(new Date(2017, 1, 21));
         overviewItems.add(new Post("sad", "i am stupid", c));
-        c.setTime(new Date(2017, 01, 01));
+        c.setTime(new Date(2017, 1, 21));
         overviewItems.add(new Post("neutral", "i bought a pen", c));
-        c.setTime(new Date(2017, 01, 02));
+        c.setTime(new Date(2017, 1, 21));
         overviewItems.add(new Post("happy", "i ate chocolate", c));
+    }
+
+    public boolean dateCompare(Date d1, Date d2) {
+        if (d1.getYear() != d2.getYear()) {
+            return false;
+        }
+
+        if (d1.getMonth() != d2.getMonth()) {
+            return false;
+        }
+
+        if (d1.getDay() != d2.getDay()) {
+            return false;
+        }
+
+        return true;
     }
 }
