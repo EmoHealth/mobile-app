@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
 import com.example.marx.emohealth.post.Post;
 
 import java.text.ParseException;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class OverviewActivity extends AppCompatActivity {
 
@@ -26,8 +28,9 @@ public class OverviewActivity extends AppCompatActivity {
             "WebOS","Ubuntu","Windows7","Max OS X"};
 
     ArrayList<Post> overviewItems = new ArrayList<Post>();
-    ArrayList<Post> displayedList = new ArrayList<>();
-    ArrayAdapter adapter;
+    ArrayList<Post> displayedList = new ArrayList<Post>();
+    ArrayAdapter<Post> adapter;
+    ArrayList<Post> currentPosts;
 
     private TextView overviewDisplayDate;
     private Button btnChangeDate;
@@ -43,9 +46,16 @@ public class OverviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         populateArray();
+        currentPosts = DataStorage.readData(getApplicationContext());
         setContentView(R.layout.overview);
         setCurrentDateOnView();
         setListView();
+        addListenerOnButton();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         addListenerOnButton();
     }
 
@@ -127,15 +137,14 @@ public class OverviewActivity extends AppCompatActivity {
             // set selected date into textview
             overviewDisplayDate.setText(displayDate);
 
-            adapter.clear();
-            Calendar c = Calendar.getInstance();
-            c.setTime(new Date(year, month, day));
+            displayedList.clear();
 
-            for (int i=0; i < overviewItems.size(); i++) {
-                if (dateCompare(overviewItems.get(i).getTimeOfPost().getTime(), c.getTime())) {
-                    adapter.add(overviewItems.get(i));
+            for (int i=0; i < currentPosts.size(); i++) {
+                if (dateCompare(currentPosts.get(i).getTimeOfPost().getTime(), finalDate)) {
+                    displayedList.add(currentPosts.get(i));
                 }
             }
+
             adapter.notifyDataSetChanged();
 
         }
@@ -144,46 +153,36 @@ public class OverviewActivity extends AppCompatActivity {
     public void setListView() {
 
         Calendar c = Calendar.getInstance();
-        c.setTime(new Date(year, month, day));
+        c.setTimeZone(TimeZone.getTimeZone("313"));
 
-        for (int i=0; i < overviewItems.size(); i++) {
-            if (dateCompare(overviewItems.get(i).getTimeOfPost().getTime(), c.getTime())) {
-                displayedList.add(overviewItems.get(i));
+        for (int i=0; i < currentPosts.size(); i++) {
+            if (dateCompare(currentPosts.get(i).getTimeOfPost().getTime(), c.getTime())) {
+                displayedList.add(currentPosts.get(i));
             }
         }
 
+
         adapter = new ArrayAdapter<Post>(this,
-                R.layout.activity_overview_listview, overviewItems);
+                R.layout.activity_overview_listview, displayedList);
 
         listView = (ListView) findViewById(R.id.overview_item_list);
         listView.setAdapter(adapter);
     }
 
     public void populateArray() {
-        Calendar c = Calendar.getInstance();
-        c.setTime(new Date(2017, 1, 21));
-        overviewItems.add(new Post("happy", "i am the best", c));
-        c.setTime(new Date(2017, 1, 21));
-        overviewItems.add(new Post("sad", "i am stupid", c));
-        c.setTime(new Date(2017, 1, 21));
-        overviewItems.add(new Post("neutral", "i bought a pen", c));
-        c.setTime(new Date(2017, 1, 21));
-        overviewItems.add(new Post("happy", "i ate chocolate", c));
+        Calendar c1 =  Calendar.getInstance();
+        c1.set(2017, 0, 21);
+        overviewItems.add(new Post(1, "i am the best", c1));
+        overviewItems.add(new Post(1, "i am stupid", c1));
+        Calendar c2 =  Calendar.getInstance();
+        c2.set(2017, 0, 1);
+        overviewItems.add(new Post(1, "i bought a pen", c2));
+        overviewItems.add(new Post(1, "i ate chocolate", c2));
     }
 
     public boolean dateCompare(Date d1, Date d2) {
-        if (d1.getYear() != d2.getYear()) {
-            return false;
-        }
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
 
-        if (d1.getMonth() != d2.getMonth()) {
-            return false;
-        }
-
-        if (d1.getDay() != d2.getDay()) {
-            return false;
-        }
-
-        return true;
+        return fmt.format(d1).equals(fmt.format(d2));
     }
 }

@@ -1,6 +1,8 @@
 package com.example.marx.emohealth;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +23,11 @@ import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements Serializable{
 
-    final String MOOD_SAD = "mood-sad";
-    final String MOOD_NEUTRAL = "mood-neutral";
-    final String MOOD_HAPPY = "mood-happy";
+    final Integer MOOD_SAD = 0;
+    final Integer MOOD_NEUTRAL = 1;
+    final Integer MOOD_HAPPY = 2;
 
-    private String currentMood;
+    private Integer currentMood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +63,13 @@ public class PostActivity extends AppCompatActivity implements Serializable{
             toast.show();
         }
 
+        // Saves the post into the file and calls the overview activity
         else {
             Post postToSave = new Post(currentMood, comment, currentTime);
             DataStorage.saveData(getApplicationContext(), postToSave);
+
+            Intent intent = new Intent(this, OverviewActivity.class);
+            startActivity(intent);
         }
     }
 
