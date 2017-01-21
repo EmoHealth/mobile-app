@@ -11,18 +11,25 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.marx.emohealth.post.Post;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class OverviewActivity extends AppCompatActivity {
 
     String[] itemArray = {"Android","IPhone","WindowsMobile","Blackberry",
             "WebOS","Ubuntu","Windows7","Max OS X"};
 
+    ArrayList<Post> overviewItems = new ArrayList<Post>();
+
     private TextView overviewDisplayDate;
     private Button btnChangeDate;
+    private ListView listView;
 
     private int year;
     private int month;
@@ -33,6 +40,7 @@ public class OverviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        populateArray();
         setContentView(R.layout.overview);
         setCurrentDateOnView();
         setListView();
@@ -116,14 +124,39 @@ public class OverviewActivity extends AppCompatActivity {
             String displayDate = newDateFormat.format(finalDate);
             // set selected date into textview
             overviewDisplayDate.setText(displayDate);
+            listView.deferNotifyDataSetChanged();
+
         }
     };
 
     public void setListView() {
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.activity_overview_listview, itemArray);
 
-        ListView listView = (ListView) findViewById(R.id.overview_item_list);
+        ArrayList<Post> displayedList = new ArrayList<>();
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(year, month, day));
+
+        for (int i=0; i < overviewItems.size(); i++) {
+            if (overviewItems.get(i).getTimeOfPost().equals(c)) {
+                displayedList.add(overviewItems.get(i));
+            }
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter<Post>(this,
+                R.layout.activity_overview_listview, displayedList);
+
+        listView = (ListView) findViewById(R.id.overview_item_list);
         listView.setAdapter(adapter);
+    }
+
+    public void populateArray() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(2017, 01, 01));
+        overviewItems.add(new Post("happy", "i am the best", c));
+        c.setTime(new Date(2017, 01, 01));
+        overviewItems.add(new Post("sad", "i am stupid", c));
+        c.setTime(new Date(2017, 01, 01));
+        overviewItems.add(new Post("neutral", "i bought a pen", c));
+        c.setTime(new Date(2017, 01, 02));
+        overviewItems.add(new Post("happy", "i ate chocolate", c));
     }
 }

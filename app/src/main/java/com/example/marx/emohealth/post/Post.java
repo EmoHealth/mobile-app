@@ -1,6 +1,7 @@
 package com.example.marx.emohealth.post;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Post {
 
@@ -32,6 +33,11 @@ public class Post {
 
     public Calendar getTimeOfPost(){
         return this.timeOfPost;
+    }
+
+    @Override
+    public String toString() {
+        return this.comments;
     }
 
 }
