@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
+import com.example.marx.emohealth.customlistadapter.PostAdapter;
 import com.example.marx.emohealth.post.Post;
 
 import java.text.ParseException;
@@ -162,8 +163,8 @@ public class OverviewActivity extends AppCompatActivity {
         }
 
 
-        adapter = new ArrayAdapter<Post>(this,
-                R.layout.activity_overview_listview, displayedList);
+        adapter = new PostAdapter(this,
+                displayedList);
 
         listView = (ListView) findViewById(R.id.overview_item_list);
         listView.setAdapter(adapter);
