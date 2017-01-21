@@ -26,4 +26,12 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    compile 'com.github.lecho:hellocharts-android:v1.5.8'
+}
+
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
 }
