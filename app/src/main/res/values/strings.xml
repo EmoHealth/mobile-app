@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EmoHealth</string>
+    <string name="title_activity_post">PostActivity</string>
+    <string name="post_it">Post</string>
 </resources>
