@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dominantMood"
+        android:text="Dominant Mood: "
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:paddingTop="10dp" />
+
+    <TextView
+        android:id="@+id/dominantMoodInput"
+        android:text="Text view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_alignBaseline="@+id/dominantMood"
+        android:layout_alignBottom="@+id/dominantMood"
+        android:layout_alignStart="@+id/TotalPostInput" />
+
+    <TextView
+        android:id="@+id/TotalPost"
+        android:text="Total post: "
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="10dp"
+        android:layout_below="@id/dominantMood"
+        />
+
+    <TextView
+        android:id="@+id/TotalPostInput"
+        android:text="Text view"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_alignBaseline="@+id/TotalPost"
+        android:layout_alignBottom="@+id/TotalPost"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
