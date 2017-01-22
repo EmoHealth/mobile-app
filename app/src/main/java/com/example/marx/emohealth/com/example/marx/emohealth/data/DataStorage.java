@@ -25,7 +25,7 @@ public class DataStorage {
             ObjectInputStream ois = new ObjectInputStream(fis);
             ArrayList<Post> listOfPosts = (ArrayList<Post>) ois.readObject();
             ois.close();
-            Log.i("Info", "File has successfully been saved");
+            Log.i("Info", "File has successfully been read");
             return listOfPosts;
 
         } catch (IOException e){
@@ -44,6 +44,7 @@ public class DataStorage {
             FileOutputStream fos = c.openFileOutput(userFileToSave, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(listToSave);
+            Log.i("Info", "File has successfully been saved");
             oos.close();
         }catch (FileNotFoundException e){
             e.printStackTrace();

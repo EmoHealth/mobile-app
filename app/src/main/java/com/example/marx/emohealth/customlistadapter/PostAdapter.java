@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.marx.emohealth.PostActivity;
 import com.example.marx.emohealth.R;
 import com.example.marx.emohealth.post.Post;
 
@@ -35,10 +36,10 @@ public class PostAdapter extends ArrayAdapter<Post> {
         // Populate the data into the template view using the data object
         postComment.setText(post.getComments());
 
-        if (post.getMood() == 0) {
+        if (post.getMood() == PostActivity.MOOD_SAD) {
             emotionIcon.setImageResource(R.drawable.sad_default);
         }
-        else if (post.getMood() == 1) {
+        else if (post.getMood() == PostActivity.MOOD_NEUTRAL) {
             emotionIcon.setImageResource(R.drawable.neutral_default);
         }
         else {

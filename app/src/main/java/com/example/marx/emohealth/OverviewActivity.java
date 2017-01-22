@@ -2,8 +2,11 @@ package com.example.marx.emohealth;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +17,8 @@ import android.widget.TextView;
 import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
 import com.example.marx.emohealth.customlistadapter.PostAdapter;
 import com.example.marx.emohealth.post.Post;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,13 +56,17 @@ public class OverviewActivity extends AppCompatActivity {
         setContentView(R.layout.overview);
         setCurrentDateOnView();
         setListView();
+
         addListenerOnButton();
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         addListenerOnButton();
+
+
     }
 
     // display current date
