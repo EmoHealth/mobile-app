@@ -65,8 +65,6 @@ public class OverviewActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         addListenerOnButton();
-
-
     }
 
     // display current date
