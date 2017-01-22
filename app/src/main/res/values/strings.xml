@@ -32,6 +32,7 @@
     <string name="stats">Stats</string>
     <string name="settings">Settings</string>
     <string name="find_friend">Find Friends</string>
+    <string name="post_comments">Any thoughts?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

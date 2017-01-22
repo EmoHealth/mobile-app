@@ -44,7 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/comment_line"
-                android:layout_weight="6"/>
+                android:layout_weight="6"
+                android:hint="@string/post_comments"/>
 
             <Button
                 android:id="@+id/post_button"
