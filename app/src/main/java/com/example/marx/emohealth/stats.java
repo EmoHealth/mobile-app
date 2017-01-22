@@ -1,14 +1,17 @@
 package com.example.marx.emohealth;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ExpandableListView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
+import com.example.marx.emohealth.post.Post;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 public class stats extends AppCompatActivity {
 
@@ -25,9 +28,9 @@ public class stats extends AppCompatActivity {
 
         listView = (ExpandableListView) findViewById(R.id.expandList);
         initData();
+
         listAdapter = new ExpandableListAdapter(this,listdataHeader,listHash);
         listView.setAdapter(listAdapter);
-
         listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
@@ -44,16 +47,194 @@ public class stats extends AppCompatActivity {
     private void initData() {
         listdataHeader = new ArrayList<>();
         listHash = new HashMap<>();
+        ArrayList<Post> postData = DataStorage.readData(this);
+        int[] postInfo;
+        int[] moodInfo;
+        int totalPost;
+        int numberOfWeeks;
+        int firstPostDate = 0;
+        int firstPostMonth = 0;
+        int postDate = 0;
 
-       // listdataHeader.add("Current Week");
-       // listdataHeader.add("Previous Week");
+        // Stubs stub dub dub
+        //Calendar rightNow = Calendar.getInstance();
+        //Calendar nextNow = Calendar.getInstance();
+       // nextNow.set(2017, 3, 02);
+       // Post stubPost = new Post(0, "Hello World", rightNow);
+       // Post stubPost2 = new Post(0, "Hello World", nextNow);
+       // ArrayList<Post> postData = new ArrayList<Post>();
+       // postData.add(0,stubPost);
+       // postData.add(1,stubPost2);
 
-        ColumnChartFrag chart = new ColumnChartFrag();
-        for (int i = 0; i < 10; i++) {
-            listdataHeader.add("Hello World");
-            listHash.put(listdataHeader.get(i), chart);
+        // Read through postData
+        postInfo = readPost(postData);
+        firstPostDate = postInfo[1];
+        numberOfWeeks = postInfo[2];
+
+        if (firstPostDate != 0) {
+            postDate = firstPostDate;
+            ColumnChartFrag chart = new ColumnChartFrag();
+
+            for (int i = 0; i <= numberOfWeeks; i++) {
+                if (i == 0 ) {
+
+                    listdataHeader.add("Current Week, " + intToStringDate(firstPostDate) + " ~");
+                } else {
+
+                    if ((postDate % 100) < 7) {
+                        firstPostMonth = (postDate / 100) - 1;
+                        postDate = firstPostMonth * 100;
+                        postDate += 23 + (postDate % 100) ;
+                    } else {
+                        postDate -= 7;
+                    }
+                    System.out.println("Current postDate is: "+  postDate);
+                    moodInfo = analyzeData(postData, postDate);
+                    listdataHeader.add("Previous Week, from: " + intToStringDate(postDate) + " ~");
+                }
+                //ColumnChartFrag chart = new ColumnChartFrag(moodInfo);
+                listHash.put(listdataHeader.get(i), chart);
+            }
         }
-
     }
 
+    private int[] analyzeData(ArrayList<Post> postData, int postDate) {
+
+        int startDate = postDate;
+        int endDate;
+        int currentDate;
+        int[] mood = new int[3];
+
+        if ((postDate % 100) > 24 ) {
+            endDate = postDate + 100 + (postDate %100 - 23);
+        } else {
+            endDate = postDate + 7;
+        }
+
+        for (int i = 0; i < postData.size(); i++) {
+            // Check if within the week
+            currentDate = dateToInt(postData.get(i).getTimeOfPost());
+            if (inBetween(startDate, endDate, currentDate)) {
+
+                // post is within current week. Collect Data
+                switch (postData.get(i).getMood()) {
+                    case 0:
+                        mood[0] += 1;
+                        break;
+                    case 1:
+                        mood[1] += 1;
+                        break;
+                    case 2:
+                        mood[2] += 1;
+                        break;
+                }
+            }
+        }
+
+        return mood;
+    }
+    private boolean inBetween(int start, int end, int current) {
+
+        // lesser than start
+        if (start - current > 0 ) {
+            return false;
+        }
+        // greater than end
+        if (end - current < 0) {
+            return false;
+        }
+        // passes all
+        return true;
+    }
+    private int[] readPost(ArrayList<Post> postData) {
+
+        int firstPostDate = -1;
+        int lastPostDate = 100000;
+        int tempDate;
+        int[] postInfo = new int[3];
+
+        // Get data from storage.
+        for (int i = 0; i < postData.size(); i++) {
+            tempDate = dateToInt(postData.get(i).getTimeOfPost());
+            if (tempDate < lastPostDate) {
+                lastPostDate = tempDate;
+            }
+            if (tempDate > firstPostDate) {
+                firstPostDate = tempDate;
+            }
+        }
+
+        postInfo[0] = postData.size();
+        postInfo[1] = firstPostDate;
+        postInfo[2] = getWeeks(firstPostDate, lastPostDate);
+        return postInfo;
+    }
+
+    private int getWeeks(int first, int last) {
+        int firstDays;
+        int lastDays;
+        int firstMonths;
+        int lastMonths;
+        int difference; // number of days apart from the first post to the last
+
+        firstDays = first % 100;
+        firstMonths = first/100;
+
+        lastDays = last % 100;
+        lastMonths = last/100;
+
+        difference = firstDays - lastDays;
+        difference += (firstMonths - lastMonths) * (30);
+
+        return difference/7;
+    }
+
+    private int dateToInt(Calendar toIntCalender) {
+
+        // 30/december post will return 30 + 11 *100 = 1130
+        Date toIntDate = toIntCalender.getTime();
+        int value = toIntDate.getDate();
+        value += (toIntDate.getMonth() *100);
+        return value;
+    }
+
+    private String intToStringDate(int value) {
+
+        // get Day & Month
+        int day = value % 100;
+        int month = value / 100;
+
+        String monthString = " ";
+        switch (month) {
+            case 0:  monthString = "January";
+                break;
+            case 1:  monthString = "February";
+                break;
+            case 2:  monthString = "March";
+                break;
+            case 3:  monthString = "April";
+                break;
+            case 4:  monthString = "May";
+                break;
+            case 5:  monthString = "June";
+                break;
+            case 6:  monthString = "July";
+                break;
+            case 7:  monthString = "August";
+                break;
+            case 8:  monthString = "September";
+                break;
+            case 9: monthString = "October";
+                break;
+            case 10: monthString = "November";
+                break;
+            case 11: monthString = "December";
+                break;
+        }
+        StringBuilder build = new StringBuilder();
+        build.append(Integer.toString(day));
+        build.append(" ");
+        build.append(monthString);
+        return build.toString();
+    }
 }
