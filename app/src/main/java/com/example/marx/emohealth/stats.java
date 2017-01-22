@@ -49,6 +49,7 @@ public class stats extends AppCompatActivity {
         listHash = new HashMap<>();
         ArrayList<Post> postData = DataStorage.readData(this);
         int[] postInfo;
+        int[] moodInfo;
         int totalPost;
         int numberOfWeeks;
         int firstPostDate = 0;
@@ -67,8 +68,6 @@ public class stats extends AppCompatActivity {
 
         // Read through postData
         postInfo = readPost(postData);
-
-        totalPost = postInfo[0];
         firstPostDate = postInfo[1];
         numberOfWeeks = postInfo[2];
 
@@ -90,13 +89,63 @@ public class stats extends AppCompatActivity {
                         postDate -= 7;
                     }
                     System.out.println("Current postDate is: "+  postDate);
+                    moodInfo = analyzeData(postData, postDate);
                     listdataHeader.add("Previous Week, from: " + intToStringDate(postDate) + " ~");
                 }
+                //ColumnChartFrag chart = new ColumnChartFrag(moodInfo);
                 listHash.put(listdataHeader.get(i), chart);
             }
         }
     }
 
+    private int[] analyzeData(ArrayList<Post> postData, int postDate) {
+
+        int startDate = postDate;
+        int endDate;
+        int currentDate;
+        int[] mood = new int[3];
+
+        if ((postDate % 100) > 24 ) {
+            endDate = postDate + 100 + (postDate %100 - 23);
+        } else {
+            endDate = postDate + 7;
+        }
+
+        for (int i = 0; i < postData.size(); i++) {
+            // Check if within the week
+            currentDate = dateToInt(postData.get(i).getTimeOfPost());
+            if (inBetween(startDate, endDate, currentDate)) {
+
+                // post is within current week. Collect Data
+                switch (postData.get(i).getMood()) {
+                    case 0:
+                        mood[0] += 1;
+                        break;
+                    case 1:
+                        mood[1] += 1;
+                        break;
+                    case 2:
+                        mood[2] += 1;
+                        break;
+                }
+            }
+        }
+
+        return mood;
+    }
+    private boolean inBetween(int start, int end, int current) {
+
+        // lesser than start
+        if (start - current > 0 ) {
+            return false;
+        }
+        // greater than end
+        if (end - current < 0) {
+            return false;
+        }
+        // passes all
+        return true;
+    }
     private int[] readPost(ArrayList<Post> postData) {
 
         int firstPostDate = -1;
