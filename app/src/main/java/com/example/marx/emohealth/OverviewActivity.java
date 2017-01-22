@@ -81,7 +81,7 @@ public class OverviewActivity extends AppCompatActivity {
         } catch (ParseException e) {
             finalDate = null;
         }
-        newDateFormat.applyPattern("EEEE d MMM yyyy");
+        newDateFormat.applyPattern("EEEE d MMM");
         String displayDate = newDateFormat.format(finalDate);
         // set selected date into textview
         overviewDisplayDate.setText(displayDate);
@@ -133,7 +133,7 @@ public class OverviewActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 finalDate = null;
             }
-            newDateFormat.applyPattern("EEEE d MMM yyyy");
+            newDateFormat.applyPattern("EEEE d MMM");
             String displayDate = newDateFormat.format(finalDate);
             // set selected date into textview
             overviewDisplayDate.setText(displayDate);
