@@ -9,13 +9,25 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     tools:context="com.example.marx.emohealth.stats"
-    >
+   >
 
     <ExpandableListView
         android:id="@+id/expandList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></ExpandableListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.marx.emohealth.menuBarFragment"
+        android:id="@+id/fragment" />
+
 
 
 </RelativeLayout>
