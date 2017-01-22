@@ -3,6 +3,7 @@ package com.example.marx.emohealth;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
 import com.example.marx.emohealth.post.Post;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,9 +26,9 @@ import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements Serializable{
 
-    final Integer MOOD_SAD = 0;
-    final Integer MOOD_NEUTRAL = 1;
-    final Integer MOOD_HAPPY = 2;
+    public final static Integer MOOD_SAD = 0;
+    public final static Integer MOOD_NEUTRAL = 1;
+    public final static Integer MOOD_HAPPY = 2;
 
     private Integer currentMood;
 
@@ -33,12 +36,18 @@ public class PostActivity extends AppCompatActivity implements Serializable{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         setMoodListeners();
+
+        Log.i("Info", "Resumed PostActivity");
+
+
     }
 
 
