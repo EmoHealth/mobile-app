@@ -26,9 +26,9 @@ import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements Serializable{
 
-    final Integer MOOD_SAD = 0;
-    final Integer MOOD_NEUTRAL = 1;
-    final Integer MOOD_HAPPY = 2;
+    public final static Integer MOOD_SAD = 0;
+    public final static Integer MOOD_NEUTRAL = 1;
+    public final static Integer MOOD_HAPPY = 2;
 
     private Integer currentMood;
 
@@ -37,24 +37,15 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         setMoodListeners();
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.selectTabWithId(R.id.post);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.overview){
-                    Intent intent = new Intent(getApplicationContext(), OverviewActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
 
+        Log.i("Info", "Resumed PostActivity");
 
 
     }
