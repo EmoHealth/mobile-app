@@ -37,6 +37,12 @@ public class PostActivity extends AppCompatActivity implements Serializable{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setMoodListeners();
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.selectTabWithId(R.id.post);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -48,13 +54,6 @@ public class PostActivity extends AppCompatActivity implements Serializable{
                 }
             }
         });
-
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        setMoodListeners();
 
 
 
