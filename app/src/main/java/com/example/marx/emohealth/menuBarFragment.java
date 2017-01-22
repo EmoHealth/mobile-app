@@ -47,6 +47,14 @@ public class menuBarFragment extends Fragment {
                 view.setSelected(true);
             }
         });
+        bottomBar.getTabWithId(R.id.circles).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CirclesActivity.class);
+                startActivity(intent);
+                view.setSelected(true);
+            }
+        });
 
 
         return view;
