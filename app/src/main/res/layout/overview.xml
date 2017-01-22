@@ -5,10 +5,6 @@
     android:id="@+id/overview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marx.emohealth.OverviewActivity">
 
 
@@ -56,14 +52,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom" />
+        android:layout_height="match_parent">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="com.example.marx.emohealth.menuBarFragment"
-        android:id="@+id/fragment" />
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.example.marx.emohealth.menuBarFragment"
+            android:id="@+id/fragment"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>
