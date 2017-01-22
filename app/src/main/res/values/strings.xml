@@ -24,4 +24,14 @@
     <string name="about_go_to_github">Go to GitHub</string>
     <string name="action_about">action about</string>
 
+    <string name="title_activity_post">PostActivity</string>
+    <string name="post_it">Post</string>
+    <string name="overview">Overview</string>
+    <string name="circles">Circles</string>
+    <string name="post">Post</string>
+    <string name="stats">Stats</string>
+    <string name="settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

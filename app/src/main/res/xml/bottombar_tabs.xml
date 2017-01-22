@@ -1,0 +1,22 @@
+<tabs>
+    <tab
+        id="@+id/overview"
+        icon="@drawable/overview"
+        title="Overview" />
+    <tab
+        id="@+id/stats"
+        icon="@drawable/stats"
+        title="Stats" />
+    <tab
+        id="@+id/post"
+        icon="@drawable/post"
+        title="Post" />
+    <tab
+        id="@+id/circles"
+        icon="@drawable/circles"
+        title="Circles" />
+    <tab
+        id="@+id/settings"
+        icon="@drawable/settings"
+        title="Settings" />
+</tabs>
