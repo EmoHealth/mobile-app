@@ -3,6 +3,7 @@ package com.example.marx.emohealth;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import com.example.marx.emohealth.com.example.marx.emohealth.data.DataStorage;
 import com.example.marx.emohealth.post.Post;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,12 +36,28 @@ public class PostActivity extends AppCompatActivity implements Serializable{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.selectTabWithId(R.id.post);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.overview){
+                    Intent intent = new Intent(getApplicationContext(), OverviewActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         setMoodListeners();
+
+
+
     }
 
 
