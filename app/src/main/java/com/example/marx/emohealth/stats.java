@@ -47,24 +47,23 @@ public class stats extends AppCompatActivity {
     private void initData() {
         listdataHeader = new ArrayList<>();
         listHash = new HashMap<>();
-      //  ArrayList<Post> postData = DataStorage.readData(this);
+        ArrayList<Post> postData = DataStorage.readData(this);
         int[] postInfo;
         int totalPost;
         int numberOfWeeks;
         int firstPostDate = 0;
         int firstPostMonth = 0;
         int postDate = 0;
-        int nextDate = 0;
 
         // Stubs stub dub dub
-        Calendar rightNow = Calendar.getInstance();
-        Calendar nextNow = Calendar.getInstance();
-        nextNow.set(2017, 3, 02);
-        Post stubPost = new Post(0, "Hello World", rightNow);
-        Post stubPost2 = new Post(0, "Hello World", nextNow);
-        ArrayList<Post> postData = new ArrayList<Post>();
-        postData.add(0,stubPost);
-        postData.add(1,stubPost2);
+        //Calendar rightNow = Calendar.getInstance();
+        //Calendar nextNow = Calendar.getInstance();
+       // nextNow.set(2017, 3, 02);
+       // Post stubPost = new Post(0, "Hello World", rightNow);
+       // Post stubPost2 = new Post(0, "Hello World", nextNow);
+       // ArrayList<Post> postData = new ArrayList<Post>();
+       // postData.add(0,stubPost);
+       // postData.add(1,stubPost2);
 
         // Read through postData
         postInfo = readPost(postData);
