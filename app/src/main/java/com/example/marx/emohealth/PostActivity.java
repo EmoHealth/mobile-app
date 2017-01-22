@@ -78,6 +78,7 @@ public class PostActivity extends AppCompatActivity implements Serializable{
             DataStorage.saveData(getApplicationContext(), postToSave);
 
             Intent intent = new Intent(this, OverviewActivity.class);
+            intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     }

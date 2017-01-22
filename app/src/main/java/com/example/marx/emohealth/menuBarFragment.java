@@ -27,6 +27,7 @@ public class menuBarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OverviewActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 view.setSelected(true);
             }
@@ -35,6 +36,7 @@ public class menuBarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), PostActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 view.setSelected(true);
             }
@@ -43,6 +45,7 @@ public class menuBarFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), stats.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 view.setSelected(true);
             }
