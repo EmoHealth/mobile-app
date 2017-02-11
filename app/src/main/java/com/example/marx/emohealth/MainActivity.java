@@ -23,6 +23,5 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Intent intent = new Intent(this, PostActivity.class);
         startActivity(intent);
-
     }
 }
